@@ -1,12 +1,13 @@
 import Link from "next/link";
 
 
+
 const Layout = ({children}) => {
     return (
         <>
-            <header className="navbar bg-base-100">
-                <div className="flex-1">
-                    <Link href={'/'} className="btn btn-ghost text-xl">Asal recepies</Link>
+            <header className="navbar bg-darkRed">
+                <div className="flex-1 dancing-script" >
+                    <Link href={'/'} className="btn btn-ghost text-2xl" >Asal Recepies</Link>
                 </div>
                 <div className="flex-none">
                     <ul className="menu menu-horizontal px-1">
