@@ -17,8 +17,8 @@ Light Accents: --soft-cream can add subtle highlights without overpowering the p
 }
 
 @media (prefers-color-scheme: dark) {
-  :root {
-  }
+  /* :root {
+  } */
 }
 
 * {
