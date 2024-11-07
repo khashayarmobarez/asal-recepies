@@ -38,7 +38,6 @@ export async function getStaticProps(context) {
     const res = await fetch(`http://localhost:5000/data/${params.id}`)
     const data = await res.json()
 
-
     return {
         props: { data },
         revalidate: 60 * 60
