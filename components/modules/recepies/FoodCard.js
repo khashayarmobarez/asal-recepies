@@ -13,7 +13,7 @@ const FoodCard = ({foodData}) => {
                     {name}  
                 </p>
                 <p>
-                    {details[0].cuisine}
+                    {details[0].Cuisine}
                 </p>
                 <p>
                     {
@@ -32,7 +32,7 @@ const FoodCard = ({foodData}) => {
                     discount > 0 &&
                     <p>{discount}%</p>
                 }
-                <Link href={`/recepie/${id}`}>see details</Link>
+                <Link href={`/recepies/${id}`}>see details</Link>
             </div>
 
             <style jsx>{`
