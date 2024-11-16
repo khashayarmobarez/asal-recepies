@@ -42,6 +42,7 @@ export async function getServerSideProps(context) {
             }
         })
 
+        // check for the error
         if(time && difficulty && timeResult.length && difficultyResult.length) {
             return item
         } else if(!time && difficulty && difficultyResult.length) {
