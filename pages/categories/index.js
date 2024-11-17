@@ -10,7 +10,7 @@ const Categories = ({ data }) => {
             <CategoriesPage />
         </div>
     );
-};
+};b
 
 export default Categories;
 
