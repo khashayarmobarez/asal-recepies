@@ -13,13 +13,8 @@ const CategoriesPage = () => {
     }
 
     const searchHandler = e => {
-        // Filter the query to only include keys with values
-        const filteredQuery = Object.fromEntries(
-            Object.entries(query).filter(([_, value]) => value)
-        );
-    
-        router.push({ pathname: '/categories', query: filteredQuery });
-    };
+        router.push({pathname:'/categories', query})
+    }
 
     return (
         <div className="min-h-[50dvh] flex flex-col">
