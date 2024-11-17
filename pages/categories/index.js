@@ -28,28 +28,29 @@ export async function getServerSideProps(context) {
 
     const filteredData = data.filter(item => {
 
-        const difficultyResult =  item.details.filter(
-            (details) => details.Difficulty && details.Difficulty
-        )
+        const difficultyResult = item.details.filter(
+            (details) => details.Difficulty === difficulty
+        );
 
-        const timeResult = item.details.filter( (detail) => {
+        const timeResult = item.details.filter((detail) => {
             const cookingTime = detail['Cooking time'] || "";
-            const [timeDetails] = cookingTime.split(' ')
-            if(time === 'less' && timeDetails && +timeDetails <= 30) {
-                return detail;
-            } else if (time === 'more' && +timeDetails > 30) {
-                return detail;
+            const [timeDetails] = cookingTime.split(' ');
+            if (time === 'less' && timeDetails && +timeDetails <= 30) {
+                return true;
+            } else if (time === 'more' && timeDetails && +timeDetails > 30) {
+                return true;
             }
-        })
+            return false;
+        });        
 
-        // check for the error
-        if(time && difficulty && timeResult.length && difficultyResult.length) {
-            return item
-        } else if(!time && difficulty && difficultyResult.length) {
-            return item
-        } else if(time && !difficulty && timeResult.length) {
-            return item
+        if (time && difficulty && timeResult.length && difficultyResult.length) {
+            return item;
+        } else if (!time && difficulty && difficultyResult.length) {
+            return item;
+        } else if (time && !difficulty && timeResult.length) {
+            return item;
         }
+        return false;
     })
 
     return {
