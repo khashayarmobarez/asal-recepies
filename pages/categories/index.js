@@ -17,7 +17,7 @@ export default Categories;
 
 export async function getServerSideProps(context) {
     const {
-        query : {
+        query: {
             difficulty,
             time
         }
@@ -27,32 +27,32 @@ export async function getServerSideProps(context) {
     const data = await res.json();
 
     const filteredData = data.filter(item => {
+        // For difficulty check
+        const difficultyResult = difficulty ? 
+            item.details.some(detail => detail.Difficulty === difficulty) : 
+            true;
 
-        const difficultyResult =  item.details.filter(
-            (details) => details.Difficulty && details.Difficulty === difficulty
-        )
+        // For time check
+        const timeResult = time ? 
+            item.details.some(detail => {
+                const cookingTimeDetail = detail['Cooking Time'];
+                if (!cookingTimeDetail) return false;
+                
+                const timeValue = parseInt(cookingTimeDetail.split(' ')[0]);
+                
+                if (time === 'less') {
+                    return timeValue <= 30;
+                } else if (time === 'more') {
+                    return timeValue > 30;
+                }
+                return false;
+            }) : 
+            true;
 
-        const timeResult = item.details.filter( (detail) => {
-            const cookingTimeDetail = detail['Cooking time'] || "";
-            
-            if(time === 'less' && parseInt(cookingTimeDetail.split(' ')[0]) <= 30) {
-                return detail;
-            } else if (time === 'more' && parseInt(cookingTimeDetail.split(' ')[0]) > 30) {
-                return detail;
-            }
-        })
-
-        // check for the error
-        if(time && difficulty && timeResult.length && difficultyResult.length) {
-            return item
-        } else if(!time && difficulty && difficultyResult.length) {
-            return item
-        } else if(time && !difficulty && timeResult.length) {
-            return item
-        }
-    })
+        return difficultyResult && timeResult;
+    });
 
     return {
-        props: {data: filteredData}
+        props: { data: filteredData }
     }
 }

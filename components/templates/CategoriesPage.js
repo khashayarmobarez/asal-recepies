@@ -9,11 +9,19 @@ const CategoriesPage = () => {
     const [query, setQuery] = useState({difficulty: '', time: ''})
 
     const changeHandler = e => {
-        setQuery({ ...query, [e.target.name]: e.target.value })
+        setQuery({ ...query, [e.target.name]: e.target.value });
     }
 
-    const searchHandler = e => {
-        router.push({pathname:'/categories', query: query})
+    const searchHandler = () => {
+        // Only adding parameters that have values
+        const cleanQuery = Object.fromEntries(
+            Object.entries(query).filter(([_, value]) => value !== '')
+        );
+        
+        router.push({
+            pathname: '/categories',
+            query: cleanQuery
+        });
     }
 
     return (
