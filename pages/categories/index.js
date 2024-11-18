@@ -29,7 +29,7 @@ export async function getServerSideProps(context) {
     const filteredData = data.filter(item => {
 
         const difficultyResult =  item.details.filter(
-            (details) => details.Difficulty && details.Difficulty
+            (details) => details.Difficulty && details.Difficulty === difficulty
         )
 
         const timeResult = item.details.filter( (detail) => {

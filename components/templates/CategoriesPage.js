@@ -9,11 +9,11 @@ const CategoriesPage = () => {
     const [query, setQuery] = useState({difficulty: '', time: ''})
 
     const changeHandler = e => {
-        setQuery({...query, [e.target.name]: e.target.value })
+        setQuery({ ...query, [e.target.name]: e.target.value })
     }
 
     const searchHandler = e => {
-        router.push({pathname:'/categories', query})
+        router.push({pathname:'/categories', query: query})
     }
 
     return (
@@ -22,9 +22,9 @@ const CategoriesPage = () => {
             <div className="w-full flex flex-col">
                 <select value={query.difficulty} name="difficulty" onChange={changeHandler}>
                     <option value=''>difficulty</option>
-                    <option value='easy'>easy</option>
-                    <option value='medium'>medium</option>
-                    <option value='hard'>hard</option>
+                    <option value='Easy'>easy</option>
+                    <option value='Medium'>medium</option>
+                    <option value='Hard'>hard</option>
                 </select>
                 <select value={query.time} name="time" onChange={changeHandler}>
                     <option value=''>cooking time</option>
