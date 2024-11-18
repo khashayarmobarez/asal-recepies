@@ -35,11 +35,12 @@ export async function getServerSideProps(context) {
         const timeResult = item.details.filter( (detail) => {
             const cookingTime = detail['Cooking time'] || "";
             const [timeDetails] = cookingTime.split(' ')
-            if(time === 'less' && timeDetails && +timeDetails <= 30) {
+            if(time === 'less' && parseInt(cookingTimeDetail.split(' ')[0]) <= 30) {
                 return detail;
-            } else if (time === 'more' && timeDetails && +timeDetails > 30) {
+            } else if (time === 'more' && parseInt(cookingTimeDetail.split(' ')[0]) > 30) {
                 return detail;
             }
+            return false;
         })
 
         // check for the error
