@@ -18,6 +18,6 @@ export async function getStaticProps() {
 
     return {
         props: {data},
-        revalidate: 30 * 60 // half an hour
+        revalidate: 60 * 60 // half an hour
     }
 }

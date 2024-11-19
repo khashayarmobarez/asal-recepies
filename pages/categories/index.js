@@ -3,11 +3,10 @@ import CategoriesPage from "../../components/templates/CategoriesPage";
 
 const Categories = ({ data }) => {
 
-    console.log(data)
 
     return (
         <div className="w-full flex flex-col items-center" >
-            <CategoriesPage />
+            <CategoriesPage data={data} />
         </div>
     );
 };
@@ -47,7 +46,7 @@ export async function getServerSideProps(context) {
                 }
                 return false;
             }) : 
-            true;
+            false;
 
         return difficultyResult && timeResult;
     });

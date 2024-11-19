@@ -1,26 +1,37 @@
+import Image from "next/image"
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import FoodCard from "../modules/recepies/FoodCard";
+
+// assets
+import foodPickupAnimation from '../../assets/SearchForFood.svg'
 
 
-const CategoriesPage = () => {
+const CategoriesPage = ({data}) => {
 
     const router = useRouter('')
 
+    console.log(data)
+
     const [query, setQuery] = useState({difficulty: '', time: ''})
+
+    useEffect(() => {
+        const { difficulty, time } = router.query;
+
+        if(query.difficulty !== difficulty || query.time !== time) {
+            setQuery ({difficulty, time })
+        }
+    },[]);
 
     const changeHandler = e => {
         setQuery({ ...query, [e.target.name]: e.target.value });
     }
 
     const searchHandler = () => {
-        // Only adding parameters that have values
-        const cleanQuery = Object.fromEntries(
-            Object.entries(query).filter(([_, value]) => value !== '')
-        );
         
         router.push({
             pathname: '/categories',
-            query: cleanQuery
+            query: query
         });
     }
 
@@ -40,6 +51,14 @@ const CategoriesPage = () => {
                     <option value='more'>more than 30 min</option>
                 </select>
                 <button onClick={searchHandler}>search</button>
+                {
+                    !data.length && <Image src={foodPickupAnimation} alt="searchFood" className="my-20" />
+                }
+                <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 ">
+                    { data.map((cardData) => 
+                        <FoodCard id={cardData.id} foodData={cardData} />
+                    )}
+                </div>
             </div>
         </div>
     );
