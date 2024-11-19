@@ -56,7 +56,7 @@ const CategoriesPage = ({data}) => {
                 }
                 <div className="w-full grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 ">
                     { data.map((cardData) => 
-                        <FoodCard id={cardData.id} foodData={cardData} />
+                        <FoodCard key={cardData.id} foodData={cardData} />
                     )}
                 </div>
             </div>
